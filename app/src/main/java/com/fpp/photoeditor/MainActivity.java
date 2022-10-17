@@ -14,11 +14,14 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
     Button button;
+    SeekBar redSeekBar, greenSeekBar, blueSeekBar, alphaSeekBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.MainImage);
         button = findViewById(R.id.CaptureImage);
+        alphaSeekBar = findViewById(R.id.alphaSeekBar);
+        redSeekBar = findViewById(R.id.redSeekBar);
+        greenSeekBar = findViewById(R.id.greenSeekBar);
+        blueSeekBar = findViewById(R.id.blueSeekBar);
+
+
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)
         != PackageManager.PERMISSION_GRANTED){
@@ -50,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 100){
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(bitmap);
+            button.setVisibility(View.GONE);
+            redSeekBar.setVisibility(View.VISIBLE);
+            greenSeekBar.setVisibility(View.VISIBLE);
+            blueSeekBar.setVisibility(View.VISIBLE);
+            alphaSeekBar.setVisibility(View.VISIBLE);
         }
     }
 }
