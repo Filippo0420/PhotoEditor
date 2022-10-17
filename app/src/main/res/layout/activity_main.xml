@@ -23,6 +23,13 @@
         />
 
     <SeekBar
+        android:id="@+id/rotationSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="360"
+        android:visibility="gone"/>
+
+    <SeekBar
         android:id="@+id/alphaSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

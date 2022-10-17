@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
     Button button;
-    SeekBar redSeekBar, greenSeekBar, blueSeekBar, alphaSeekBar;
+    SeekBar redSeekBar, greenSeekBar, blueSeekBar, alphaSeekBar, rotationSeekBar;
     Bitmap image;
 
     @Override
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.MainImage);
         button = findViewById(R.id.CaptureImage);
+
+        rotationSeekBar = findViewById(R.id.rotationSeekBar);
         alphaSeekBar = findViewById(R.id.alphaSeekBar);
         redSeekBar = findViewById(R.id.redSeekBar);
         greenSeekBar = findViewById(R.id.greenSeekBar);
@@ -55,6 +58,27 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 100);
+            }
+        });
+
+        rotationSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                //imageView.setRotation(i);
+                Matrix matrix = new Matrix();
+                imageView.setScaleType(ImageView.ScaleType.MATRIX);   //required
+                matrix.postRotate(i, imageView.getDrawable().getBounds().width()/2, imageView.getDrawable().getBounds().height()/2);
+                imageView.setImageMatrix(matrix);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 
@@ -155,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
             greenSeekBar.setVisibility(View.VISIBLE);
             blueSeekBar.setVisibility(View.VISIBLE);
             alphaSeekBar.setVisibility(View.VISIBLE);
+            rotationSeekBar.setVisibility(View.VISIBLE);
         }
     }
 
