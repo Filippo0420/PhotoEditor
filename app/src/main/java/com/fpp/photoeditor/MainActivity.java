@@ -9,6 +9,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     Button button;
     SeekBar redSeekBar, greenSeekBar, blueSeekBar, alphaSeekBar;
-
+    Bitmap image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,12 @@ public class MainActivity extends AppCompatActivity {
         greenSeekBar = findViewById(R.id.greenSeekBar);
         blueSeekBar = findViewById(R.id.blueSeekBar);
 
-
+        int filterColor[] = {
+                0,
+                0,
+                0,
+                0
+        };
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)
         != PackageManager.PERMISSION_GRANTED){
@@ -50,6 +57,90 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, 100);
             }
         });
+
+        alphaSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                filterColor[0] = i;
+                imageView.setColorFilter(Color.argb(filterColor[0],
+                        filterColor[1],
+                        filterColor[2],
+                        filterColor[3]));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        redSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                filterColor[1] = i;
+                imageView.setColorFilter(Color.argb(filterColor[0],
+                        filterColor[1],
+                        filterColor[2],
+                        filterColor[3]));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        greenSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                filterColor[2] = i;
+                imageView.setColorFilter(Color.argb(filterColor[0],
+                        filterColor[1],
+                        filterColor[2],
+                        filterColor[3]));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        blueSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                filterColor[3] = i;
+                imageView.setColorFilter(Color.argb(filterColor[0],
+                        filterColor[1],
+                        filterColor[2],
+                        filterColor[3]));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     @Override
@@ -57,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 100){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(bitmap);
+            image = (Bitmap) data.getExtras().get("data");
+            imageView.setImageBitmap(image);
             button.setVisibility(View.GONE);
             redSeekBar.setVisibility(View.VISIBLE);
             greenSeekBar.setVisibility(View.VISIBLE);
@@ -66,4 +157,6 @@ public class MainActivity extends AppCompatActivity {
             alphaSeekBar.setVisibility(View.VISIBLE);
         }
     }
+
+
 }

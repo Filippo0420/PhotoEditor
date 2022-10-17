@@ -26,24 +26,28 @@
         android:id="@+id/alphaSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="255"
         android:visibility="gone"/>
 
     <SeekBar
         android:id="@+id/redSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="255"
         android:visibility="gone"/>
 
     <SeekBar
         android:id="@+id/greenSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="255"
         android:visibility="gone"/>
 
     <SeekBar
         android:id="@+id/blueSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:max="255"
         android:visibility="gone"/>
 
     <Button
