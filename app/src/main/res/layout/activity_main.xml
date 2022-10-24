@@ -19,15 +19,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_margin="10dp"
+        android:layout_margin="20dp"
         />
 
-    <SeekBar
-        android:id="@+id/rotationSeekBar"
+    <LinearLayout
+        android:id="@+id/rotationButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="360"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        >
+
+        <Button
+            android:id="@+id/TurnLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:text="Turn Left"
+            />
+
+        <Button
+            android:id="@+id/TurnRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="3dp"
+            android:text="Turn Right"
+            />
+
+    </LinearLayout>
+
+
 
     <SeekBar
         android:id="@+id/alphaSeekBar"

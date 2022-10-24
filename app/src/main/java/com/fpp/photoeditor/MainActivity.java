@@ -17,14 +17,22 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
-    Button button;
+    Button button, turnLeft, turnRight;
     SeekBar redSeekBar, greenSeekBar, blueSeekBar, alphaSeekBar, rotationSeekBar;
     Bitmap image;
+    LinearLayout rotationButtons;
+
+    public int[] rotations = {
+
+    };
+
+    public int rotation = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +41,15 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.MainImage);
         button = findViewById(R.id.CaptureImage);
+        turnLeft = findViewById(R.id.TurnLeft);
+        turnRight = findViewById(R.id.TurnRight);
 
-        rotationSeekBar = findViewById(R.id.rotationSeekBar);
         alphaSeekBar = findViewById(R.id.alphaSeekBar);
         redSeekBar = findViewById(R.id.redSeekBar);
         greenSeekBar = findViewById(R.id.greenSeekBar);
         blueSeekBar = findViewById(R.id.blueSeekBar);
+
+        rotationButtons = findViewById(R.id.rotationButtons);
 
         int filterColor[] = {
                 0,
@@ -61,24 +72,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        rotationSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        turnLeft.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                //imageView.setRotation(i);
-                Matrix matrix = new Matrix();
-                imageView.setScaleType(ImageView.ScaleType.MATRIX);   //required
-                matrix.postRotate(i, imageView.getDrawable().getBounds().width()/2, imageView.getDrawable().getBounds().height()/2);
-                imageView.setImageMatrix(matrix);
+            public void onClick(View view) {
+                rotation -= 90;
+                imageView.setRotation(rotation);
             }
+        });
 
+        turnRight.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+            public void onClick(View view) {
+                rotation += 90;
+                imageView.setRotation(rotation);
             }
         });
 
@@ -179,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             greenSeekBar.setVisibility(View.VISIBLE);
             blueSeekBar.setVisibility(View.VISIBLE);
             alphaSeekBar.setVisibility(View.VISIBLE);
-            rotationSeekBar.setVisibility(View.VISIBLE);
+            rotationButtons.setVisibility(View.VISIBLE);
         }
     }
 
