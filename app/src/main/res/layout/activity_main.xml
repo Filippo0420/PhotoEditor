@@ -22,62 +22,89 @@
         android:layout_margin="20dp"
         />
 
+
+
     <LinearLayout
-        android:id="@+id/rotationButtons"
-        android:layout_width="match_parent"
+        android:id="@+id/imageControls"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:visibility="gone"
         >
 
-        <Button
-            android:id="@+id/TurnLeft"
-            android:layout_width="wrap_content"
+        <SeekBar
+            android:id="@+id/widthSeekbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="3dp"
-            android:text="Turn Left"
+            android:min="1"
+            android:max="200"
+            android:progress="1"
             />
 
-        <Button
-            android:id="@+id/TurnRight"
-            android:layout_width="wrap_content"
+        <SeekBar
+            android:id="@+id/heightSeekbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="3dp"
-            android:text="Turn Right"
+            android:min="1"
+            android:max="200"
+            android:progress="1"
+
             />
+
+        <LinearLayout
+            android:id="@+id/rotationButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/TurnLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:text="Turn Left"
+                />
+
+            <Button
+                android:id="@+id/TurnRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="3dp"
+                android:text="Turn Right"
+                />
+
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/alphaSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="255"/>
+
+        <SeekBar
+            android:id="@+id/redSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="255"/>
+
+        <SeekBar
+            android:id="@+id/greenSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="255"/>
+
+        <SeekBar
+            android:id="@+id/blueSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="255"/>
 
     </LinearLayout>
 
 
-
-    <SeekBar
-        android:id="@+id/alphaSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="255"
-        android:visibility="gone"/>
-
-    <SeekBar
-        android:id="@+id/redSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="255"
-        android:visibility="gone"/>
-
-    <SeekBar
-        android:id="@+id/greenSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="255"
-        android:visibility="gone"/>
-
-    <SeekBar
-        android:id="@+id/blueSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="255"
-        android:visibility="gone"/>
 
     <Button
         android:id="@+id/CaptureImage"

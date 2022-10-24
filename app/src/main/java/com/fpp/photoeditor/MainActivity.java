@@ -24,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
     Button button, turnLeft, turnRight;
-    SeekBar redSeekBar, greenSeekBar, blueSeekBar, alphaSeekBar, rotationSeekBar;
+    SeekBar redSeekBar, greenSeekBar, blueSeekBar, alphaSeekBar, widthSeekBar, heightSeekBar;
     Bitmap image;
-    LinearLayout rotationButtons;
+    LinearLayout imageControls;
 
     public int[] rotations = {
 
@@ -48,8 +48,15 @@ public class MainActivity extends AppCompatActivity {
         redSeekBar = findViewById(R.id.redSeekBar);
         greenSeekBar = findViewById(R.id.greenSeekBar);
         blueSeekBar = findViewById(R.id.blueSeekBar);
+        widthSeekBar = findViewById(R.id.widthSeekbar);
+        heightSeekBar = findViewById(R.id.heightSeekbar);
 
-        rotationButtons = findViewById(R.id.rotationButtons);
+        imageControls = findViewById(R.id.imageControls);
+
+        final int baseImageViewSize[] = {
+                imageView.getLayoutParams().width,
+                imageView.getLayoutParams().height
+        };
 
         int filterColor[] = {
                 0,
@@ -85,6 +92,40 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 rotation += 90;
                 imageView.setRotation(rotation);
+            }
+        });
+
+        widthSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                imageView.setScaleX((float)seekBar.getProgress()/100);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        heightSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                imageView.setScaleY((float)seekBar.getProgress()/100);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 
@@ -181,11 +222,7 @@ public class MainActivity extends AppCompatActivity {
             image = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(image);
             button.setVisibility(View.GONE);
-            redSeekBar.setVisibility(View.VISIBLE);
-            greenSeekBar.setVisibility(View.VISIBLE);
-            blueSeekBar.setVisibility(View.VISIBLE);
-            alphaSeekBar.setVisibility(View.VISIBLE);
-            rotationButtons.setVisibility(View.VISIBLE);
+            imageControls.setVisibility(View.VISIBLE);
         }
     }
 
